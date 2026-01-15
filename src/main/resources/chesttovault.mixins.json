@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "archives.tater.chesttovault.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "StructureStartMixin",
+    "VaultBlockEntityServerMixin",
+    "VaultBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
