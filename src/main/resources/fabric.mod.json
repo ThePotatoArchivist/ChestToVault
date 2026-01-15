@@ -3,15 +3,15 @@
 	"id": "chesttovault",
 	"version": "${version}",
 	"name": "ChestToVault",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Server-side loot for everyone!",
 	"authors": [
-		"Me!"
+		"ThePotatoArchivist"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/chest-to-vault",
+		"sources": "https://github.com/ThePotatoArchivist/ChestToVault"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/chesttovault/icon.png",
 	"environment": "*",
 	"entrypoints": {
