@@ -12,15 +12,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
-import net.minecraft.world.level.block.entity.vault.VaultConfig;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -54,18 +51,8 @@ public class StructureStartMixin {
             worldGenLevel.setBlock(checkPos, Blocks.BARRIER.defaultBlockState(), Block.UPDATE_SKIP_ALL_SIDEEFFECTS | Block.UPDATE_INVISIBLE);
 
             worldGenLevel.setBlock(checkPos, Blocks.VAULT.withPropertiesOf(state), Block.UPDATE_CLIENTS);
-            if (!(worldGenLevel.getBlockEntity(checkPos) instanceof VaultBlockEntity vault)) return;
 
-            var config = vault.getConfig();
-            vault.setConfig(new VaultConfig(
-                    chest.getLootTable(),
-                    config.activationRange(),
-                    config.deactivationRange(),
-                    ItemStack.EMPTY,
-                    config.overrideLootTableToDisplay(),
-                    config.playerDetector(),
-                    config.entitySelector()
-            ));
+            ChestToVault.setLootTable(worldGenLevel.getBlockEntity(checkPos), chest.getLootTable());
         });
     }
 }

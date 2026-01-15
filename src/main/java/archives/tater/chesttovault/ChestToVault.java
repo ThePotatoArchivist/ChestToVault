@@ -4,9 +4,16 @@ import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
+import net.minecraft.world.level.block.entity.vault.VaultConfig;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.storage.loot.LootTable;
 
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +31,22 @@ public class ChestToVault implements ModInitializer {
 
     public static final TagKey<Structure> NO_VAULT_REPLACE = TagKey.create(Registries.STRUCTURE, id("no_vault_replace"));
 
-	@Override
+    public static void setLootTable(@Nullable BlockEntity blockEntity, ResourceKey<LootTable> lootTable) {
+        if (!(blockEntity instanceof VaultBlockEntity vault)) return;
+
+        var original = vault.getConfig();
+        vault.setConfig(new VaultConfig(
+                lootTable,
+                original.activationRange(),
+                original.deactivationRange(),
+                ItemStack.EMPTY,
+                original.overrideLootTableToDisplay(),
+                original.playerDetector(),
+                original.entitySelector()
+        ));
+    }
+
+    @Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.

@@ -3,6 +3,7 @@
   "package": "archives.tater.chesttovault.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "MonsterRoomFeatureMixin",
     "StructureStartMixin",
     "VaultBlockEntityServerMixin",
     "VaultBlockMixin"
